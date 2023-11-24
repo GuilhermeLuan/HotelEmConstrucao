@@ -39,19 +39,16 @@ int main(){
                 printf("\nInsira o numero do quarto: ");
                 scanf("%d", &hospede.quarto);
 
-//                do {
-//                    if(!verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados)){
-//                        printf("Quarto nao eh valido!\n");
-//                    }
-//                    if(verificarQuartoOcupado(hospede.quarto, quartosOcupados)){
-//                        printf("Quarto ta ocupado!\n");
-//                    }
-//                    if(!verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) || verificarQuartoOcupado(hospede.quarto, quartosOcupados) ){
-//                        printf("Insira o numero do quarto: ");
-//                        scanf("%d", &hospede.quarto);
-//                    }
-//
-//                } while (!verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) ||verificarQuartoOcupado(hospede.quarto, quartosVazios) );\
+                do {
+                    if(verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0){
+                        printf("Quarto nao eh valido!");
+                    } else if(verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
+                        printf("Quarto ta ocupado!\n");
+                    }
+                    printf("\nInsira o numero do quarto: ");
+                    scanf("%d", &hospede.quarto);
+                } while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1);
+
 
                 listaHospedes[tamanho] = hospede;
 
