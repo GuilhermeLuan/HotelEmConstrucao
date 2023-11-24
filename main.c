@@ -6,6 +6,7 @@
 #include "verificarQuartoOcupado.c"
 #include "verificarQuartoValido.c"
 #include "structHospede.c"
+#include "verificarNome.c"
 
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
@@ -84,6 +85,43 @@ int main(){
                 }
 
                 break;
+                case 4:
+                char nomeHospede[30];
+                printf("\n");
+                printf("Voce escolheu editar um hospede\n");
+                printf("Escolha um hospede:\n");
+                 for (int i = 0; i < tamanho; ++i) {
+                    printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                }
+                printf("Digite o nome do hospede que voce gostaria de editar:\n");
+                fgets(nomeHospede, 30, stdin);
+                if(verficiarNome(nomeHospede, tamanho, *listaHospedes)==){
+                    int posinome = indicaPosicaoNome(nomeHospede, tamanho, *listaHospedes);
+                    printf("Qual parametro voce quer editar? ecolha entre Nome(1), R.G(2), Quarto(3)");
+                    int parametro;
+                    scanf("%d", &parametro);
+                    if(parametro == 1){
+                        printf("Edite o nome:\n");
+                        fgets(nomeHospede, 30, stdin);
+                        listaHospedes[posinome].nome = nomeHospede;
+                    }else if(parametro == 2){
+                        int rg;
+                        printf("Edite o R.G:\n");
+                        scanf("%d", &rg);
+                        //talvez coloca uma mensagem de confirmação : Aqui está o nome/rg/... é isso mesmo ?
+                        listaHospedes[posinome].RG = rg;
+                    }else if(parametro == 3){
+                        int quar;
+                        printf("Edite o quarto:\n");
+                        scanf("%d", &quar);
+                        listaHospedes[posinome].quarto = quar;
+                    }
+                    
+                }
+     
+    
+
         }
     } while (opcaoUsuario != 8);
 
