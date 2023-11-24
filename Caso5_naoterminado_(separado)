@@ -1,0 +1,17 @@
+// caso 5 da main
+case 5: // remover hospede
+                printf("\n");
+                printf("Remover hospede\n");
+                int rgHospede;
+                printf("Digite o RG do hospede: ");
+                scanf("%d", &rgHospede);
+
+                for (int i = 0; i< tamanho; ++i){
+                    
+                    printf("Digite o RG do hospede que deseja deletar:%s ", );
+                    fgets(hospede.RG);
+                    
+            
+                }
+
+                break;
