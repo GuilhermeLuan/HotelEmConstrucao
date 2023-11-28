@@ -8,12 +8,15 @@
 #include "structHospede.c"
 #include "verificarNome.c"
 #include "indicaPosicaoNome.c"
+#include "removerElemento.c"
+#include "verificarSeRGExiste.c"
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
-    int quartosOcupados[10] = {100};
+    int quartosOcupados[10] = {0,1};
     int opcaoUsuario;
     int tamanho = 0;
+    int tamanhoArray = 10;
     Hospede hospede;
     Hospede *listaHospedes = (Hospede*) malloc(10 * sizeof(hospede));
 
@@ -42,34 +45,35 @@ int main(){
                 printf("\nInsira o numero do quarto: ");
                 scanf("%d", &hospede.quarto);
 
-                do {
+
+                while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
                     if(verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0){
                         printf("Quarto nao eh valido!");
                     } else if(verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
-                        printf("Quarto ta ocupado!\n");
+                        printf("Quarto ta ocupado!");
                     }
                     printf("\nInsira o numero do quarto: ");
                     scanf("%d", &hospede.quarto);
-                } while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1);
-
-
+                }
                 listaHospedes[tamanho] = hospede;
-
+                removerElemento(quartosVazios, &tamanhoArray, hospede.quarto);
                 printf("\n");
                 printf("Cadastro Registrado: \n");
                 printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d", hospede.nome, hospede.quarto, hospede.RG);
-
-
+                quartosOcupados[tamanho] = hospede.quarto;
                 tamanho++;
-                Sleep(1000);
+                for (int i = 0; i < 10; ++i) {
+                    printf("\n%d ", quartosOcupados[i]);
+                }
                 break;
             case 2:
                 printf("\n");
                 printf("Lista de hospedes\n");
 
                 for (int i = 0; i < tamanho; ++i) {
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
-                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
 
                 }
                 break;
@@ -79,6 +83,18 @@ int main(){
                 int rgHospede;
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
+
+//                do{
+//                    printf("Digite o RG do hospede: ");
+//                    scanf("%d", &rgHospede);
+//                } while (verificarSeRGExiste(listaHospedes, rgHospede, tamanho) == 0);
+
+                while(verificarSeRGExiste(listaHospedes, rgHospede, tamanho) == 0){
+                    printf("RG no sistema!\nInsira novamente!\n");
+                    printf("Digite o RG do hospede: ");
+                    scanf("%d", &rgHospede);
+                }
+
 
                 for (int i = 0; i < tamanho; ++i) {
                     if(listaHospedes[i].RG == rgHospede){
@@ -92,6 +108,7 @@ int main(){
                     printf("Voce escolheu editar um hospede\n");
                     printf("Escolha um hospede:\n");
                      for (int i = 0; i < tamanho; ++i) {
+                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                         printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
                     }
@@ -100,7 +117,7 @@ int main(){
                     fflush(stdin);
                     fgets(nomeHospede, 30, stdin);
                     nomeHospede[strcspn(nomeHospede,"\n")] = 0;
-                    if(verificarNome(nomeHospede, tamanho, listaHospedes) == 0){
+                    if(verificarNome(nomeHospede, tamanho, listaHospedes) == 1){
                         printf("Voce escolheu editar Hospede : %s\n", nomeHospede);
                         int posicaoNome = indicaPosicaoNome(nomeHospede, tamanho, listaHospedes);
                         printf("Qual parametro voce quer editar? ecolha entre Nome=(1), R.G=(2), Quarto=(3)");
