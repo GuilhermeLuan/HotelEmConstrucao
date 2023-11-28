@@ -7,7 +7,7 @@
 #include "verificarQuartoValido.c"
 #include "structHospede.c"
 #include "verificarNome.c"
-#include "indicaPosiçãoNome.c"
+#include "indicaPosicaoNome.c"
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
@@ -26,7 +26,9 @@ int main(){
             //Inserir um novo hospede.
             case 1:
                 printf("Insira o nome do hospede: ");
-                scanf("%s", &hospede.nome);
+                fflush(stdin);
+                fgets(hospede.nome, 30, stdin);
+                hospede.nome[strcspn(hospede.nome,"\n")] = 0;
 
                 //Verificar RG.
                 printf("Digite o RG do hospede: ");
@@ -95,27 +97,33 @@ int main(){
                     }
                     char nomeHospede[30];
                     printf("Digite o nome do hospede que voce gostaria de editar:\n");
+                    fflush(stdin);
                     fgets(nomeHospede, 30, stdin);
-                    if(verificarNome(nomeHospede, tamanho, listaHospedes)== 1){
-                        int posinome = indicaPosicaoNome(nomeHospede, tamanho, listaHospedes);
-                        printf("Qual parametro voce quer editar? ecolha entre Nome(1), R.G(2), Quarto(3)");
+                    nomeHospede[strcspn(nomeHospede,"\n")] = 0;
+                    if(verificarNome(nomeHospede, tamanho, listaHospedes) == 0){
+                        printf("Voce escolheu editar Hospede : %s\n", nomeHospede);
+                        int posicaoNome = indicaPosicaoNome(nomeHospede, tamanho, listaHospedes);
+                        printf("Qual parametro voce quer editar? ecolha entre Nome=(1), R.G=(2), Quarto=(3)");
                         int parametro;
                         scanf("%d", &parametro);
                         if(parametro == 1){
                             printf("Edite o nome:\n");
+                            fflush(stdin);
                             fgets(nomeHospede, 30, stdin);
-                            //listaHospedes[posinome].nome = nomeHospede;
+                            nomeHospede[strcspn(nomeHospede,"\n")] = 0;
+                            strcpy(listaHospedes[posicaoNome].nome , nomeHospede);
                         }else if(parametro == 2){
                             int rg;
                             printf("Edite o R.G:\n");
                             scanf("%d", &rg);
                             //talvez coloca uma mensagem de confirmação : Aqui está o nome/rg/... é isso mesmo ?
-                            listaHospedes[posinome].RG = rg;
+                            printf("%d", posicaoNome);
+                            listaHospedes[posicaoNome].RG = rg;
                         }else if(parametro == 3){
                             int quar;
                             printf("Edite o quarto:\n");
                             scanf("%d", &quar);
-                            listaHospedes[posinome].quarto = quar;
+                            listaHospedes[posicaoNome].quarto = quar;
                         }
 
                     }
