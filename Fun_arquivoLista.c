@@ -1,3 +1,5 @@
+//FUNCAO PARA LER A LISTA DE HOSPEDE
+
 #include "structHospede.c"
 FILE *f;
     f = fopen("ListaHospede.txt", "w");
