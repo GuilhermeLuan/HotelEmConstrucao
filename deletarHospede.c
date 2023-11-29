@@ -6,7 +6,6 @@ void deletarHospede(int quartoDesejado, int quartosOcupados[10], int quartosVazi
             quartosVazios[i] = quartoDesejado;
             quartosOcupados[i] = 0; // Marca como quarto vago
             printf("Hospede removido do quarto %d.\n", quartoDesejado);
-            return;
         }
     }
     

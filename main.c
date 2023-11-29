@@ -11,6 +11,8 @@
 #include "indicaPosicaoNome.c"
 #include "removerElemento.c"
 #include "verificarSeRGExiste.c"
+#include "deletarHospede.c"
+#include "Fun_arquivoLista.c"
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
@@ -43,6 +45,7 @@ int main(){
 
                 printf("\nInsira o numero do quarto: ");
                 scanf("%d", &hospede.quarto);
+                int quartoDesejado = hospede.quarto;
 
 
                 while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
@@ -141,6 +144,38 @@ int main(){
                         }
 
                     }
+                break;
+                // caso 5 da main
+            case 5: // remover hospede
+                printf("\n");
+                printf("Remover hospede\n");
+                printf("Digite o RG do hospede: ");
+                scanf("%d", &rgHospede);
+
+                for (int i = 0; i< qtdHospedes; ++i){
+                    
+                    if(listaHospedes[i].RG == rgHospede){
+                        //removerElemento(listaHospedes, &tamanhoArray, listaHospedes[i].RG);
+                        /* deletarHospede(quartoDesejado, quartosOcupados[10], quartosVazios[10]); */
+                        //removerElemento(listaHospedes, &tamanhoArray, listaHospedes[i].quarto);
+                        
+
+                    }
+                    
+            
+                }
+
+                break;
+            case 6:
+
+            for (int i = 0; i < qtdHospedes; ++i){
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                    printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                }
+
+            criaArquivo(listaHospedes, qtdHospedes);
+
                 break;
         }
     } while (opcaoUsuario != 8);
