@@ -6,7 +6,7 @@ void criaArquivo(Hospede *listaHospedes, int qtdHospedes){
 
     if(f == NULL){
         printf("erro ao abrir arquivo!!!\n");
-        return 1;
+        exit(1);
     }
 
     for (int i = 0; i < qtdHospedes; ++i){

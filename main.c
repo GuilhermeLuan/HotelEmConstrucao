@@ -11,9 +11,8 @@
 #include "removerElemento.c"
 #include "verificarSeRGExiste.c"
 #include "deletarHospede.c"
-#include "Fun_arquivoLista.c"
+#include "criaArquivo.c"
 #include "removerHospede.c"
-#include "cmpfunc.c"
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
@@ -98,10 +97,10 @@ int main(){
                     scanf("%d", &rgHospede);
                 }
 
-                printf("\nInformações do Hospede:");
+                printf("\nInformacoes do Hospede:");
                 for (int i = 0; i < qtdHospedes; ++i) {
                     if(listaHospedes[i].RG == rgHospede){
-                        printf("Nome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf("\nNome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                     }
                 }
 
@@ -112,7 +111,7 @@ int main(){
                     printf("Escolha um hospede:\n");
                      for (int i = 0; i < qtdHospedes; ++i) {
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                        printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf("Nome: %s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
                     }
                     char nomeHospede[30];
@@ -140,10 +139,10 @@ int main(){
                             printf("%d", posicaoNome);
                             listaHospedes[posicaoNome].RG = rg;
                         }else if(parametro == 3){
-                            int quar;
+                            int quarto;
                             printf("Edite o quarto:\n");
-                            scanf("%d", &quar);
-                            listaHospedes[posicaoNome].quarto = quar;
+                            scanf("%d", &quarto);
+                            listaHospedes[posicaoNome].quarto = quarto;
                         }
 
                     }
@@ -161,19 +160,10 @@ int main(){
                     scanf("%d", &rgHospede);
                 }
 
-                removerHospede(listaHospedes, &qtdHospedes, rgHospede);
-                quartosVazios[tamanhoArray - 1] = hospede.quarto;
-                qsort(quartosVazios, 10, sizeof(int), cmpfunc);
+                removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
 
                 break;
             case 7:
-
-                for (int i = 0; i < qtdHospedes; ++i){
-                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
-                        printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
-                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
-                    }
-
                 criaArquivo(listaHospedes, qtdHospedes);
                 break;
         }
