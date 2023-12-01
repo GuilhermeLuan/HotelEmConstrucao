@@ -1,5 +1,26 @@
-Case 4 
-Verifiar o RG
-Verficiar Nome
-Verificar Quarto
-Colocar confirmação Das escolhgas (o nome  já está feito)
+caso 1 : FUNCIONANDO;
+caso 2 : FUNCIONANDO;
+caso 3: FUNCIONANDO;
+caso 4: nao editou nada e voltou para o menu;
+caso 5: sem mensagens de sucesso de remocao do hospede, e nao esta funcionando;
+caso 6: nao concluido;
+caso 7: FUNCIONANDO porem quando todos os quartos estao ocupados nao cria o arquivo, Sem mensagem de arquivo criado.
+
+				OUTROS ERROS:
+
+Quando um quarto é ocupado o "quarto 110" eh repitido no final
+
+
+o quarto 109 aparece no menu apos ja ser escolhido;
+Apos todos os quartos estarem lotados, nao consigo retornar para o menu;
+adicionar mensagem de "todos os quartos ocupados " caso estejam todos lotados;
+na hora de buscar informaçoes, parece ascento na palavra "informaçoes";
+
+
+notas adicionais:
+caso 3 os "0" a esquerda nao parecem na lista
+
+
+				**Testando entradas errada/falsas**
+
+Caso 1: quando a entrada é de um quarto que n exite da a informaçao de que o quarto é invalido, talvez seja interessante manter uma formatação exata do RG
