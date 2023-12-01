@@ -23,4 +23,4 @@ caso 3 os "0" a esquerda nao parecem na lista
 
 				**Testando entradas errada/falsas**
 
-Caso 1: quando a entrada é de um quarto que n exite da a informaçao de que o quarto é invalido, talvez seja interessante manter uma formatação exata do RG, e quando todos os quartos estão ocupados na tentativa de hospedar mais um hospede quando estemos no menu de escolher quarto ele fica em um loop eterno de quartos ocupados, se for colocado uma letra no RG o codigo da erro e fica em um loop eterno
+Caso 1: quando a entrada é de um quarto que n exite da a informaçao de que o quarto é invalido, talvez seja interessante manter uma formatação exata do RG, e quando todos os quartos estão ocupados na tentativa de hospedar mais um hospede quando estemos no menu de escolher quarto ele fica em um loop eterno de quartos ocupados
