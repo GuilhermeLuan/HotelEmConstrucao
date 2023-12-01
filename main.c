@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 #include <unistd.h>
 #include "menu.c"
 #include "verificarQuartoOcupado.c"
@@ -13,15 +12,17 @@
 #include "verificarSeRGExiste.c"
 #include "deletarHospede.c"
 #include "Fun_arquivoLista.c"
+#include "removerHospede.c"
+#include "cmpfunc.c"
 int main(){
     //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
-    int quartosOcupados[10] = {0,1};
+    int quartosOcupados[10];
     int opcaoUsuario;
     int qtdHospedes = 0;
     int tamanhoArray = 10;
     Hospede hospede;
-    Hospede *listaHospedes = (Hospede*) malloc(10 * sizeof(hospede));
+    Hospede *listaHospedes = (Hospede*) calloc(10, sizeof(hospede));
 
     do {
         imprimirMenu();
@@ -35,11 +36,13 @@ int main(){
                 fgets(hospede.nome, 30, stdin);
                 hospede.nome[strcspn(hospede.nome,"\n")] = 0;
 
+                //Valida RG
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &hospede.RG);
+                fflush(stdin);
 
                 printf("Os quartos disponiveis sao: ");
-                for (int i = 0; i < sizeof(quartosVazios) / sizeof(quartosVazios[0]); ++i) {
+                for (int i = 0; i < tamanhoArray; ++i) {
                     printf("%d ", quartosVazios[i]);
                 }
 
@@ -152,30 +155,26 @@ int main(){
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
 
-                for (int i = 0; i< qtdHospedes; ++i){
-                    
-                    if(listaHospedes[i].RG == rgHospede){
-                        //removerElemento(listaHospedes, &tamanhoArray, listaHospedes[i].RG);
-                        /* deletarHospede(quartoDesejado, quartosOcupados[10], quartosVazios[10]); */
-                        //removerElemento(listaHospedes, &tamanhoArray, listaHospedes[i].quarto);
-                        
-
-                    }
-                    
-            
+                while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) == 0){
+                    printf("RG ano existe no sistema!\n Insira novamente!\n");
+                    printf(" Digite o RG do hospede: ");
+                    scanf("%d", &rgHospede);
                 }
+
+                removerHospede(listaHospedes, &qtdHospedes, rgHospede);
+                quartosVazios[tamanhoArray - 1] = hospede.quarto;
+                qsort(quartosVazios, 10, sizeof(int), cmpfunc);
 
                 break;
-            case 6:
+            case 7:
 
-            for (int i = 0; i < qtdHospedes; ++i){
-                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
-                    printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
-                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
-                }
+                for (int i = 0; i < qtdHospedes; ++i){
+                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                        printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                    }
 
-            criaArquivo(listaHospedes, qtdHospedes);
-
+                criaArquivo(listaHospedes, qtdHospedes);
                 break;
         }
     } while (opcaoUsuario != 8);
