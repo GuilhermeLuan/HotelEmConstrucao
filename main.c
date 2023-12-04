@@ -119,7 +119,7 @@ int main(){
                     fflush(stdin);
                     fgets(nomeHospede, 30, stdin);
                     nomeHospede[strcspn(nomeHospede,"\n")] = 0;
-                    if(verificarNome(nomeHospede, qtdHospedes, listaHospedes) == 0){
+                    if(verificarNome(nomeHospede, qtdHospedes, listaHospedes) == 1){
                         printf("Voce escolheu editar o Hospede : %s\n", nomeHospede);
                         int posicaoNome = indicaPosicaoNome(nomeHospede, qtdHospedes, listaHospedes);
                         printf("Qual parametro voce quer editar? Escolha entre Nome=(1), R.G=(2), Quarto=(3)");
@@ -164,7 +164,9 @@ int main(){
 
                 break;
             case 7:
-                criaArquivo(listaHospedes, qtdHospedes);
+                if(criaArquivo(listaHospedes, qtdHospedes) == 0){
+                    printf("Arquivo criado com sucesso!");
+                }
                 break;
         }
     } while (opcaoUsuario != 8);
