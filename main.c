@@ -13,8 +13,8 @@
 #include "deletarHospede.c"
 #include "criaArquivo.c"
 #include "removerHospede.c"
+#include "validandoTamanhoRG.c"
 int main(){
-    //CODIGO ABAIXO É APENAS UM TESTE
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
     int quartosOcupados[10];
     int opcaoUsuario;
@@ -35,11 +35,21 @@ int main(){
                 fgets(hospede.nome, 30, stdin);
                 hospede.nome[strcspn(hospede.nome,"\n")] = 0;
 
-                //Valida RG
                 printf("Digite o RG do hospede: ");
-                scanf("%d", &hospede.RG);
+                int rgHospede;
+                scanf("%d", &rgHospede);
                 fflush(stdin);
+                while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) || verificarRgValido(rgHospede) == 0){
+                    if(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes)){
+                        printf("RG ja existe no sistema!\n Insira novamente!\n");
+                    } if (verificarRgValido(rgHospede) == 0) {
+                        printf("Formato de RG invalido!\n Insira novamente!\n");
+                    }
 
+                    printf(" Digite o RG do hospede: ");
+                    scanf("%d", &rgHospede);
+                }
+                hospede.RG = rgHospede;
                 printf("Os quartos disponiveis sao: ");
                 for (int i = 0; i < tamanhoArray; ++i) {
                     printf("%d ", quartosVazios[i]);
@@ -86,13 +96,12 @@ int main(){
                 printf("\n");
                 printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                 printf("Buscar hospedes\n");
-                int rgHospede;
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
 
 
                 while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) == 0){
-                    printf("RG ano existe no sistema!\n Insira novamente!\n");
+                    printf("RG nao existe no sistema!\n Insira novamente!\n");
                     printf(" Digite o RG do hospede: ");
                     scanf("%d", &rgHospede);
                 }
@@ -122,7 +131,7 @@ int main(){
                     if(verificarNome(nomeHospede, qtdHospedes, listaHospedes) == 1){
                         printf("Voce escolheu editar o Hospede : %s\n", nomeHospede);
                         int posicaoNome = indicaPosicaoNome(nomeHospede, qtdHospedes, listaHospedes);
-                        printf("Qual parametro voce quer editar? Escolha entre Nome=(1), R.G=(2), Quarto=(3)");
+                        printf("Qual parametro voce quer editar? Escolha entre Nome=(1), R.G=(2), Quarto=(3):");
                         int parametro;
                         scanf("%d", &parametro);
                         if(parametro == 1){
@@ -142,6 +151,16 @@ int main(){
                             int quarto;
                             printf("Edite o quarto:\n");
                             scanf("%d", &quarto);
+
+                            while (verificarQuartoValido(quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(quarto, quartosOcupados) == 1){
+                                if(verificarQuartoValido(quarto, quartosVazios, quartosOcupados) == 0){
+                                    printf("Quarto nao eh valido!\n");
+                                } else if(verificarQuartoOcupado(quarto, quartosOcupados) == 1){
+                                    printf("Quarto ta ocupado!\n");
+                                }
+                                printf("Insira o numero do quarto: ");
+                                scanf("%d", &quarto);
+                            }
                             listaHospedes[posicaoNome].quarto = quarto;
                         }
 
@@ -155,13 +174,15 @@ int main(){
                 scanf("%d", &rgHospede);
 
                 while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) == 0){
-                    printf("RG ano existe no sistema!\n Insira novamente!\n");
+                    printf("RG nao existe no sistema!\n Insira novamente!\n");
                     printf(" Digite o RG do hospede: ");
                     scanf("%d", &rgHospede);
                 }
 
                 removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
 
+                break;
+            case 6:
                 break;
             case 7:
                 if(criaArquivo(listaHospedes, qtdHospedes) == 0){

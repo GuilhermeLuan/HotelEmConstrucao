@@ -2,20 +2,17 @@ caso 1 : FUNCIONANDO;
 caso 2 : FUNCIONANDO;
 caso 3: FUNCIONANDO;
 caso 4: nao editou nada e voltou para o menu;
-caso 5: sem mensagens de sucesso de remocao do hospede, e nao esta funcionando;
+caso 5: FUNCIONANDO;
 caso 6: nao concluido;
-caso 7: FUNCIONANDO porem quando todos os quartos estao ocupados nao cria o arquivo, Sem mensagem de arquivo criado.
+caso 7: FUNCIONANDO.
     Não deixar criar arquivo caso o hotel esteja vazio.
 
 				OUTROS ERROS:
 
-Quando um quarto é ocupado o "quarto 110" eh repitido no final - ARRUMADO;
 
 
-o quarto 109 aparece no menu apos ja ser escolhido - ARRUMADO;
 Apos todos os quartos estarem lotados, nao consigo retornar para o menu;
 adicionar mensagem de "todos os quartos ocupados " caso estejam todos lotados;
-na hora de buscar informaçoes, parece ascento na palavra "informaçoes"; - ARRUMADO
 
 
 notas adicionais:
