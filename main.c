@@ -90,7 +90,13 @@ int main(){
                 }
                 break;
             case 2:
-                printf("\n");
+
+                if(qtdHospedes == 0){
+                    printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }
+            
+            
+               else{printf("\n");
                 printf("Lista de hospedes\n");
 
                 for (int i = 0; i < qtdHospedes; ++i) {
@@ -100,10 +106,16 @@ int main(){
 
                 }
                 sleep(1);
+               }
                 break;
             case 3:
-                printf("\n");
-                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+
+                if(qtdHospedes == 0){
+                    printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }
+
+                else{printf("\n");
+                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                 printf("Buscar hospedes\n");
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
@@ -123,10 +135,15 @@ int main(){
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     }
                 }
-
+                }
                 break;
             case 4:
-                    printf("\n");
+
+                if(qtdHospedes == 0){
+                    printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }
+
+                   else{printf("\n");
                     printf("Voce escolheu editar um hospede\n");
                     printf("Escolha um hospede:\n");
                      for (int i = 0; i < qtdHospedes; ++i) {
@@ -207,10 +224,16 @@ int main(){
                         }
 
                          printf("Hospede editado com sucesso!\n");
+                   }
                 break;
                 // caso 5 da main
             case 5: // remover hospede
-                printf("\n");
+
+                if(qtdHospedes == 0){
+                    printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }
+
+                else{printf("\n");
                 printf("Remover hospede\n");
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
@@ -222,13 +245,22 @@ int main(){
                 }
 
                 removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
+                }
                 break;
             case 6:
-                printf("Numero dos quartos vazios!");
+                if(qtdHospedes == 0){
+                printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }
+                printf("Numero dos quartos vazios: %d");
                 break;
             case 7:
-                if(criaArquivo(listaHospedes, qtdHospedes) == 0){
+                if(qtdHospedes == 0){
+                printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                }            
+                else{
+                    if(criaArquivo(listaHospedes, qtdHospedes) == 0){
                     printf("Arquivo criado com sucesso!");
+                    }
                 }
                 break;
         }
