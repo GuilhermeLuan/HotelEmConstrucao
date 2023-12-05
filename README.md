@@ -17,6 +17,7 @@ Este projeto é um projeto acadêmico de algoritmo de programação, sendo o pro
 2. Vá para o arquivo (main.c).
 3. Aperte a tecla F6 para compilar e executar.
 4. Siga as instruções do menu.
+![image](https://github.com/GuilhermeLuan/HotelEmConstrucao/assets/137916326/af68485e-9955-4e41-a40f-571c527ac4bd)
 
 ## Equipe:
 
