@@ -251,7 +251,10 @@ int main(){
                 if(qtdHospedes == 0){
                 printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
                 }
-                printf("Numero dos quartos vazios: %d");
+                printf("Os seguintes quartos estao disponiveis:\n");
+                for (int i = 0; i < 10; i++){
+                    printf("%d  ", quartosVazios[i]);
+                }
                 break;
             case 7:
                 if(qtdHospedes == 0){
