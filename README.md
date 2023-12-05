@@ -19,6 +19,9 @@ Este projeto é um projeto acadêmico de algoritmo de programação, sendo o pro
 4. Siga as instruções do menu.
 
 
+## REPRESENTAÇÃO DO MENU
+
+
 ![image](https://github.com/GuilhermeLuan/HotelEmConstrucao/assets/137916326/af68485e-9955-4e41-a40f-571c527ac4bd)
 
 
