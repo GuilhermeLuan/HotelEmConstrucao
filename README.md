@@ -1,24 +1,27 @@
-# ProjetoFinal
-- Esse é o repositório para o Projeto Final da disciplina de Algoritmos e Programação Estruturada do Grupo 6.
-## Projeto
+# Sobre esse código:
 
-#Processo de intalação do GCC:
-1- Abra o terminal do seu sistema operacional.
-2- Digite o seguinte comando e pressione Enter: sudo apt-get update
-3- Em seguida, digite o seguinte comando e pressione Enter: sudo apt-get install build-essential
-4- Aguarde até que o processo de instalação seja concluído.
-Agora você tem o GCC instalado em seu sistema. Para verificar se o GCC foi instalado corretamente, digite o seguinte comando no terminal: gcc --version
+Este projeto é um projeto acadêmico de algoritmo de programação, sendo o projeto final do semestre e criado para fins avaliativos. Ele simula um sistema de hotel voltado para o recepcionista como usuário.
 
+## Como Instalar:
 
-#Imagem do Menu:
-![image](https://github.com/GuilhermeLuan/HotelEmConstrucao/assets/87244095/35d52d85-6f40-472b-8332-31fc1b38fca1)
+1. Baixe o [VScode](https://code.visualstudio.com/).
+2. Baixe o GCC.
+3. Baixe a extensão C/C++ Compiler Run.
+4. Execute o comando: `git clone https://github.com/GuilhermeLuan/ProjetoFinal.git`.
+5. Extraia os arquivos do arquivo ZIP.
+6. Vá em "File", "Open File" (Ctrl+O), selecione os arquivos extraídos do ZIP do código do hotel e selecione todos.
 
+## Como Rodar o Código:
 
-Crie um sistema que permita o cadastro de hóspedes de um hotel. O menu deve permitir as seguintes ações:
-1. Inserir um novo hóspede em um quarto vazio;
-2. Listar hóspedes;
-3. Buscar hóspede;
-4. Editar hóspede;
-5. Remover hóspede;
-6. Mostrar os números dos quartos vazios;
-7. Salvar lista de hóspedes com respectivos quartos em arquivo
+1. Abra o VSCode.
+2. Vá para o arquivo (main.c).
+3. Aperte a tecla F6 para compilar e executar.
+4. Siga as instruções do menu.
+
+## Equipe:
+
+- Guilherme Luan
+- Guilherme Basilio
+- Gabriel Victo
+- Matheus Lopes
+- Teodoro Matias
