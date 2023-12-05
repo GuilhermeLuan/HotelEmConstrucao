@@ -8,9 +8,11 @@ void removerHospede(Hospede array[], int *tamanho, int hospedeRG, int quartosVaz
             quartosVazios[*tamanhoQuartos] = array[i].quarto;
             (*tamanhoQuartos)++;
             qsort(quartosVazios, *tamanhoQuartos, sizeof(int), cmpfunc);
+
             // Remover o quarto dos quartos ocupados
+            int quartoARemover = array[i].quarto;
             for (int j = 0; j < *tamanhoQuartos; j++) {
-                if (quartosOcupados[j] == array[i].quarto) {
+                if (quartosOcupados[j] == quartoARemover) {
                     for (int k = j; k < *tamanhoQuartos - 1; k++) {
                         quartosOcupados[k] = quartosOcupados[k + 1];
                     }

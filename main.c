@@ -84,7 +84,7 @@ int main(){
                     printf("Cadastro Registrado com sucesso !\n");
                     printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
                     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                    quartosOcupados[qtdHospedes] = hospede.quarto;
+                    quartosOcupados[qtdHospedes-1] = hospede.quarto;
                     qtdHospedes++;
                     sleep(1);
                 }
@@ -222,10 +222,9 @@ int main(){
                 }
 
                 removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
-
                 break;
             case 6:
-                printf("%d", qtdHospedes);
+                printf("Numero dos quartos vazios!");
                 break;
             case 7:
                 if(criaArquivo(listaHospedes, qtdHospedes) == 0){
