@@ -20,6 +20,7 @@ int main(){
     int opcaoUsuario;
     int qtdHospedes = 0;
     int tamanhoArray = 10;
+    int rgHospede;
     Hospede hospede;
     Hospede *listaHospedes = (Hospede*) calloc(10, sizeof(hospede));
 
@@ -30,58 +31,63 @@ int main(){
 
         switch (opcaoUsuario) {
             case 1:
-                printf("Insira o nome do hospede: ");
-                fflush(stdin);
-                fgets(hospede.nome, 30, stdin);
-                hospede.nome[strcspn(hospede.nome,"\n")] = 0;
+                if(qtdHospedes == 10){
+                    printf("Hotel esta cheio!\n");
+                    printf("Tente novamente amanha!\n");
+                }
+                else{
+                    printf("Insira o nome do hospede: ");
+                    fflush(stdin);
+                    fgets(hospede.nome, 30, stdin);
+                    hospede.nome[strcspn(hospede.nome,"\n")] = 0;
 
-                printf("Digite o RG do hospede: ");
-                int rgHospede;
-                scanf("%d", &rgHospede);
-                fflush(stdin);
-                while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) || verificarRgValido(rgHospede) == 0){
-                    if(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes)){
-                        printf("RG ja existe no sistema!\n Insira novamente!\n");
-                    } if (verificarRgValido(rgHospede) == 0) {
-                        printf("Formato de RG invalido!\n Insira novamente!\n");
-                    }
-
-                    printf(" Digite o RG do hospede: ");
+                    printf("Digite o RG do hospede: ");
                     scanf("%d", &rgHospede);
                     fflush(stdin);
-                }
-                hospede.RG = rgHospede;
-                printf("Os quartos disponiveis sao: ");
-                for (int i = 0; i < tamanhoArray; ++i) {
-                    printf("%d ", quartosVazios[i]);
-                }
+                    while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) || verificarRgValido(rgHospede) == 0){
+                        if(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes)){
+                            printf("RG ja existe no sistema!\n Insira novamente!\n");
+                        } if (verificarRgValido(rgHospede) == 0) {
+                            printf("Formato de RG invalido!\n Insira novamente!\n");
+                        }
 
-                printf("\nInsira o numero do quarto: ");
-                scanf("%d", &hospede.quarto);
-                fflush(stdin);
-                
-
-
-                while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
-                    if(verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0){
-                        printf("Quarto nao eh valido!\n");
-                    } else if(verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
-                        printf("Quarto ta ocupado!\n");
+                        printf(" Digite o RG do hospede: ");
+                        scanf("%d", &rgHospede);
+                        fflush(stdin);
                     }
-                    printf("Insira o numero do quarto: ");
+                    hospede.RG = rgHospede;
+                    printf("Os quartos disponiveis sao: ");
+                    for (int i = 0; i < tamanhoArray; ++i) {
+                        printf("%d ", quartosVazios[i]);
+                    }
+
+                    printf("\nInsira o numero do quarto: ");
                     scanf("%d", &hospede.quarto);
                     fflush(stdin);
+
+
+
+                    while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
+                        if(verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0){
+                            printf("Quarto nao eh valido!\n");
+                        } else if(verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
+                            printf("Quarto ta ocupado!\n");
+                        }
+                        printf("Insira o numero do quarto: ");
+                        scanf("%d", &hospede.quarto);
+                        fflush(stdin);
+                    }
+                    listaHospedes[qtdHospedes] = hospede;
+                    removerElemento(quartosVazios, &tamanhoArray, hospede.quarto);
+                    printf("\n");
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                    printf("Cadastro Registrado com sucesso !\n");
+                    printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
+                    printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                    quartosOcupados[qtdHospedes] = hospede.quarto;
+                    qtdHospedes++;
+                    sleep(1);
                 }
-                listaHospedes[qtdHospedes] = hospede;
-                removerElemento(quartosVazios, &tamanhoArray, hospede.quarto);
-                printf("\n");
-                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                printf("Cadastro Registrado com sucesso !\n");
-                printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
-                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                quartosOcupados[qtdHospedes] = hospede.quarto;
-                qtdHospedes++;
-                sleep(1);
                 break;
             case 2:
                 printf("\n");
@@ -219,6 +225,7 @@ int main(){
 
                 break;
             case 6:
+                printf("%d", qtdHospedes);
                 break;
             case 7:
                 if(criaArquivo(listaHospedes, qtdHospedes) == 0){
