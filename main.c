@@ -28,7 +28,10 @@ int main(){
         imprimirMenu();
         printf("Escolha uma opcao: ");
         scanf("%d", &opcaoUsuario);
-
+        fflush(stdin);
+        if(opcaoUsuario > 9){
+            printf("\nOpcao invalida!!!\n");
+        }
         switch (opcaoUsuario) {
             case 1:
                 if(qtdHospedes == 10){
