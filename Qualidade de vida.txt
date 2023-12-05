@@ -23,3 +23,14 @@ caso 3 os "0" a esquerda nao parecem na lista -> Isso é esperado do C
 
 Caso 1: quando a entrada é de um quarto que n exite da a informaçao de que o quarto é invalido, talvez seja interessante manter uma formatação exata do RG,
  e quando todos os quartos estão ocupados na tentativa de hospedar mais um hospede quando estemos no menu de escolher quarto ele fica em um loop eterno de quartos ocupados
+
+Joana Santos - 8542173
+Pedro Oliveira - 7324891
+Camila Silva - 6198234
+Rafael Costa - 5487132
+Larissa Pereira - 9654321
+Marcelo Souza - 3789542
+Beatriz Lima - 7128365
+Bruno Rocha - 8941237
+Juliana Almeida - 4567890
+Lucas Martins - 1238765
