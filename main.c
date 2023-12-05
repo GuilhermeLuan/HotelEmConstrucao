@@ -48,6 +48,7 @@ int main(){
 
                     printf(" Digite o RG do hospede: ");
                     scanf("%d", &rgHospede);
+                    fflush(stdin);
                 }
                 hospede.RG = rgHospede;
                 printf("Os quartos disponiveis sao: ");
@@ -57,7 +58,8 @@ int main(){
 
                 printf("\nInsira o numero do quarto: ");
                 scanf("%d", &hospede.quarto);
-                int quartoDesejado = hospede.quarto;
+                fflush(stdin);
+                
 
 
                 while (verificarQuartoValido(hospede.quarto, quartosVazios, quartosOcupados) == 0 || verificarQuartoOcupado(hospede.quarto, quartosOcupados) == 1){
@@ -68,12 +70,13 @@ int main(){
                     }
                     printf("Insira o numero do quarto: ");
                     scanf("%d", &hospede.quarto);
+                    fflush(stdin);
                 }
                 listaHospedes[qtdHospedes] = hospede;
                 removerElemento(quartosVazios, &tamanhoArray, hospede.quarto);
                 printf("\n");
                 printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                printf("Cadastro Registrado: \n");
+                printf("Cadastro Registrado com sucesso !\n");
                 printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
                 printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                 quartosOcupados[qtdHospedes] = hospede.quarto;
@@ -94,7 +97,7 @@ int main(){
                 break;
             case 3:
                 printf("\n");
-                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 printf("Buscar hospedes\n");
                 printf("Digite o RG do hospede: ");
                 scanf("%d", &rgHospede);
@@ -106,10 +109,12 @@ int main(){
                     scanf("%d", &rgHospede);
                 }
 
-                printf("\nInformacoes do Hospede:");
+                printf("Informacoes do Hospede:\n");
                 for (int i = 0; i < qtdHospedes; ++i) {
                     if(listaHospedes[i].RG == rgHospede){
-                        printf("\nNome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                        printf("Nome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     }
                 }
 
@@ -128,25 +133,56 @@ int main(){
                     fflush(stdin);
                     fgets(nomeHospede, 30, stdin);
                     nomeHospede[strcspn(nomeHospede,"\n")] = 0;
-                    if(verificarNome(nomeHospede, qtdHospedes, listaHospedes) == 1){
+
+                    while(verificarNome(nomeHospede, qtdHospedes, listaHospedes) == 1){
+                        printf("Nome nao pertence a um hospede! Escreva novamente\n");
+                        fgets(nomeHospede, 30, stdin);
+                        nomeHospede[strcspn(nomeHospede,"\n")] = 0;
+                    }
+
                         printf("Voce escolheu editar o Hospede : %s\n", nomeHospede);
                         int posicaoNome = indicaPosicaoNome(nomeHospede, qtdHospedes, listaHospedes);
-                        printf("Qual parametro voce quer editar? Escolha entre Nome=(1), R.G=(2), Quarto=(3):");
+                        printf("Qual parametro voce quer editar? Escolha entre Nome =(1), R.G =(2), Quarto =(3):");
                         int parametro;
                         scanf("%d", &parametro);
+                        fflush(stdin);
+
+                        while(parametro > 3 || parametro < 1){
+                            printf("Escreva um parametro valido!\n");
+                            scanf("%d", &parametro);
+                            fflush(stdin);
+                        }
+
+
+                        ///EDITAR NOME
                         if(parametro == 1){
                             printf("Edite o nome:\n");
                             fflush(stdin);
                             fgets(nomeHospede, 30, stdin);
                             nomeHospede[strcspn(nomeHospede,"\n")] = 0;
                             strcpy(listaHospedes[posicaoNome].nome , nomeHospede);
+
+
+                        ///EDITAR RG
                         }else if(parametro == 2){
                             int rg;
                             printf("Edite o R.G:\n");
                             scanf("%d", &rg);
-                            //talvez coloca uma mensagem de confirmação : Aqui está o nome/rg/... é isso mesmo ?
-                            printf("%d", posicaoNome);
+                            fflush(stdin);
+
+                        while(verificarSeRGExiste(listaHospedes, rg, qtdHospedes) || verificarRgValido(rg) == 0){
+                            if(verificarSeRGExiste(listaHospedes, rg, qtdHospedes)){
+                                printf("RG ja existe no sistema!\n Insira novamente!\n");
+                            } if (verificarRgValido(rg) == 0) {
+                                printf("Formato de RG invalido!\n Insira novamente!\n");
+                            }
+                                scanf("%d", &rg);
+                                fflush(stdin);
+                            }  
+
                             listaHospedes[posicaoNome].RG = rg;
+
+                        //EDITAR QUARTO
                         }else if(parametro == 3){
                             int quarto;
                             printf("Edite o quarto:\n");
@@ -164,7 +200,7 @@ int main(){
                             listaHospedes[posicaoNome].quarto = quarto;
                         }
 
-                    }
+                         printf("Hospede editado com sucesso!\n");
                 break;
                 // caso 5 da main
             case 5: // remover hospede
