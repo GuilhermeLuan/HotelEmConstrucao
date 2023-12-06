@@ -10,9 +10,9 @@ int criaArquivo(Hospede *listaHospedes, int qtdHospedes){
     }
 
     for (int i = 0; i < qtdHospedes; ++i){
-                    fprintf(f,"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
-                    fprintf(f,"Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
-                    fprintf(f,"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                    fprintf(f,"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                    fprintf(f,"Nome: %s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                    fprintf(f,"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
     }
     fclose(f);
     return 0;

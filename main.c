@@ -49,12 +49,12 @@ int main(){
                     fflush(stdin);
                     while(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes) || verificarRgValido(rgHospede) == 0){
                         if(verificarSeRGExiste(listaHospedes, rgHospede, qtdHospedes)){
-                            printf("RG ja existe no sistema!\n Insira novamente!\n");
+                            printf("RG ja existe no sistema!\nInsira novamente!\n");
                         } if (verificarRgValido(rgHospede) == 0) {
-                            printf("Formato de RG invalido!\n Insira novamente!\n");
+                            printf("Formato de RG invalido!\nInsira novamente!\n");
                         }
 
-                        printf(" Digite o RG do hospede: ");
+                        printf("Digite o RG do hospede: ");
                         scanf("%d", &rgHospede);
                         fflush(stdin);
                     }
@@ -85,9 +85,9 @@ int main(){
                     printf("\n");
                     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     printf("Cadastro Registrado com sucesso !\n");
-                    printf("Nome do Hospede:%s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
+                    printf("Nome do Hospede: %s\nQuarto do Hospede: %d\nRG do Hospede: %d\n", hospede.nome, hospede.quarto, hospede.RG);
                     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                    quartosOcupados[qtdHospedes-1] = hospede.quarto;
+                    quartosOcupados[qtdHospedes] = hospede.quarto;
                     qtdHospedes++;
                     sleep(1);
                 }
@@ -104,7 +104,7 @@ int main(){
 
                 for (int i = 0; i < qtdHospedes; ++i) {
                     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                    printf("Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                    printf(" Nome:%s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
 
                 }
@@ -134,7 +134,7 @@ int main(){
                 for (int i = 0; i < qtdHospedes; ++i) {
                     if(listaHospedes[i].RG == rgHospede){
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                        printf("Nome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                        printf(" Nome: %s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                     }
                 }
@@ -145,14 +145,14 @@ int main(){
                 if(qtdHospedes == 0){
                     printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
                 }
-
-                   else{printf("\n");
-                    printf("Voce escolheu editar um hospede\n");
-                    printf("Escolha um hospede:\n");
-                     for (int i = 0; i < qtdHospedes; ++i) {
-                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                        printf("Nome: %s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
-                        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
+                else {
+                       printf("\n");
+                       printf("Voce escolheu editar um hospede\n");
+                       printf("Escolha um hospede:\n");
+                       for (int i = 0; i < qtdHospedes; ++i) {
+                           printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                           printf("Nome: %s\nRG: %d\nQuarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                           printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'\n");
                     }
                     char nomeHospede[30];
                     printf("Digite o nome do hospede que voce gostaria de editar:\n");
@@ -204,7 +204,7 @@ int main(){
                             }
                                 scanf("%d", &rg);
                                 fflush(stdin);
-                            }  
+                            }
 
                             listaHospedes[posicaoNome].RG = rg;
 
@@ -223,11 +223,20 @@ int main(){
                                 printf("Insira o numero do quarto: ");
                                 scanf("%d", &quarto);
                             }
+
+                            int quartoAntigo = listaHospedes[posicaoNome].quarto;
+                            removerElemento(quartosVazios, &tamanhoArray, quarto);
+                            removerElemento(quartosOcupados, &tamanhoArray, quartoAntigo);
+                            quartosOcupados[qtdHospedes-1] = quarto;
+                            quartosVazios[tamanhoArray] = quartoAntigo;
+                            tamanhoArray++;
+                            qsort(quartosVazios, tamanhoArray, sizeof(int), cmpfunc);
+
                             listaHospedes[posicaoNome].quarto = quarto;
                         }
 
                          printf("Hospede editado com sucesso!\n");
-                   }
+               }
                 break;
                 // caso 5 da main
             case 5: // remover hospede
@@ -248,15 +257,21 @@ int main(){
                 }
 
                 removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
+                tamanhoArray++;
                 }
                 break;
             case 6:
                 if(qtdHospedes == 0){
-                printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+                    printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
+
                 }
-                printf("Os seguintes quartos estao disponiveis:\n");
-                for (int i = 0; i < 10; i++){
-                    printf("%d  ", quartosVazios[i]);
+                if (qtdHospedes == 10){
+                    printf("\nTodos os quartos estao ocupados! \n");
+                } else{
+                    printf("Os seguintes quartos estao disponiveis:\n");
+                    for (int i = 0; i < tamanhoArray; i++){
+                        printf("%d  ", quartosVazios[i]);
+                    }
                 }
                 break;
             case 7:
