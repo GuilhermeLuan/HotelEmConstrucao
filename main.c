@@ -14,6 +14,7 @@
 #include "criaArquivo.c"
 #include "removerHospede.c"
 #include "validandoTamanhoRG.c"
+#include "editarQuarto.c"
 int main(){
     int quartosVazios[10] = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
     int quartosOcupados[10];
@@ -223,7 +224,24 @@ int main(){
                             printf("Insira o numero do quarto: ");
                             scanf("%d", &quarto);
                         }
-                        listaHospedes[posicaoNome].quarto = quarto;
+
+//Hospede array[], int *tamanho, char nomeHospede[], int novoQuarto, int quartosVazios[], int *tamanhoQuartos, int quartosOcupados[]
+                        editarQuarto(listaHospedes, &tamanhoArray, nomeHospede, quarto, quartosVazios, &qtdHospedes, quartosOcupados);
+
+                       
+/*                         quartosOcupados[qtdHospedes-1] = quarto; */
+
+
+/*                         listaHospedes[posicaoNome].quarto = quarto;
+                        for(int i = 0; i < 10 ; i++ ){
+                                if(quarto == quartosVazios[i]){
+                                    quartosVazios[i] = 110;
+                                }
+                        } */
+
+                        for(int i = 0; i < 10; i++){
+                            printf(" array na posicao [%d] = %d\n", i, quartosVazios[i]);
+                        }
                     }
 
                     printf("Hospede editado com sucesso!\n");
@@ -246,18 +264,29 @@ int main(){
                         printf(" Digite o RG do hospede: ");
                         scanf("%d", &rgHospede);
                     }
-
+                    
+                    
                     removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
+                    tamanhoArray++;
+
+                        for(int i = 0; i < 10; i++){
+                        printf(" array na posicao [%d] = %d\n", i, quartosVazios[i]);
+                        }
+                    
                 }
                 break;
             case 6:
                 if(qtdHospedes == 0){
                     printf("\nNenhum hospede no hotel! Que tal ser o primeiro ?\n");
-                }
-                printf("Os seguintes quartos estao disponiveis:\n");
-                for (int i = 0; i < 10; i++){
-                    printf("%d  ", quartosVazios[i]);
-                }
+
+                }else if(qtdHospedes == 10){
+                    printf("\n Todos os quartos estao ocupados!\n");
+
+                }else{printf("Os quartos disponiveis sao: ");
+                    for (int i = 0; i < tamanhoArray; ++i) {
+                        printf("%d ", quartosVazios[i]);
+                    }
+                    }
                 break;
             case 7:
                 if(qtdHospedes == 0){

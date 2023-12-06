@@ -27,7 +27,9 @@ void removerHospede(Hospede array[], int *tamanho, int hospedeRG, int quartosVaz
             }
 
             // Atualizar o tamanho do array
+
             (*tamanho)--;
+
             // O elemento foi removido, podemos sair do loop
             printf("Hospede removido com sucesso!");
             break;
