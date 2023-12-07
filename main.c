@@ -224,20 +224,16 @@ int main(){
                             printf("Insira o numero do quarto: ");
                             scanf("%d", &quarto);
                         }
+                        int quartoAntigo = listaHospedes[posicaoNome].quarto;
+                        removerElemento(quartosVazios, &tamanhoArray, quarto);
+                        removerElemento(quartosOcupados, &qtdHospedes, quartoAntigo);
+                        quartosOcupados[qtdHospedes-1] = quarto;
+                        quartosVazios[tamanhoArray] = quartoAntigo;
+                        tamanhoArray++;
+                        qsort(quartosVazios, tamanhoArray, sizeof(int), cmpfunc);
 
-//Hospede array[], int *tamanho, char nomeHospede[], int novoQuarto, int quartosVazios[], int *tamanhoQuartos, int quartosOcupados[]
-                        editarQuarto(listaHospedes, &tamanhoArray, nomeHospede, quarto, quartosVazios, &qtdHospedes, quartosOcupados);
+                        listaHospedes[posicaoNome].quarto = quarto;
 
-                       
-/*                         quartosOcupados[qtdHospedes-1] = quarto; */
-
-
-/*                         listaHospedes[posicaoNome].quarto = quarto;
-                        for(int i = 0; i < 10 ; i++ ){
-                                if(quarto == quartosVazios[i]){
-                                    quartosVazios[i] = 110;
-                                }
-                        } */
 
                         for(int i = 0; i < 10; i++){
                             printf(" array na posicao [%d] = %d\n", i, quartosVazios[i]);
