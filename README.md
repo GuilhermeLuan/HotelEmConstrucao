@@ -7,7 +7,7 @@ Este projeto é um projeto acadêmico de algoritmo de programação, sendo o pro
 1. Baixe o [VScode](https://code.visualstudio.com/).
 2. Baixe o GCC.
 3. Baixe a extensão C/C++ Compiler Run.
-4. Execute o comando: `git clone https://github.com/GuilhermeLuan/ProjetoFinal.git`.
+4. Execute o comando: `git clone [https://github.com/GuilhermeLuan/ProjetoFinal.git](https://github.com/GuilhermeLuan/HotelEmConstrucao.git)`.
 5. Extraia os arquivos do arquivo ZIP.
 6. Vá em "File", "Open File" (Ctrl+O), selecione os arquivos extraídos do ZIP do código do hotel e selecione todos.
 
