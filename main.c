@@ -23,7 +23,7 @@ int main(){
     int tamanhoArray = 10;
     int rgHospede;
     Hospede hospede;
-    Hospede *listaHospedes = (Hospede*) calloc(10, sizeof(hospede));
+    Hospede *listaHospedes = (Hospede*) calloc(11, sizeof(hospede));
 
     do {
         imprimirMenu();
@@ -135,7 +135,7 @@ int main(){
                     for (int i = 0; i < qtdHospedes; ++i) {
                         if(listaHospedes[i].RG == rgHospede){
                             printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-                            printf("Nome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
+                            printf(" Nome:%s\n RG: %d\n Quarto: %d\n", listaHospedes[i].nome, listaHospedes[i].RG, listaHospedes[i].quarto);
                             printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
                         }
                     }
@@ -211,6 +211,11 @@ int main(){
 
                         //EDITAR QUARTO
                     }else if(parametro == 3){
+                        if(qtdHospedes == 10){
+                            printf("Hotel esta cheio !\n");
+                            break;
+                        }
+                        else{
                         int quarto;
                         printf("Edite o quarto:\n");
                         scanf("%d", &quarto);
@@ -227,20 +232,17 @@ int main(){
                         int quartoAntigo = listaHospedes[posicaoNome].quarto;
                         removerElemento(quartosVazios, &tamanhoArray, quarto);
                         removerElemento(quartosOcupados, &qtdHospedes, quartoAntigo);
-                        quartosOcupados[qtdHospedes-1] = quarto;
+                        quartosOcupados[qtdHospedes] = quarto;
                         quartosVazios[tamanhoArray] = quartoAntigo;
                         tamanhoArray++;
                         qsort(quartosVazios, tamanhoArray, sizeof(int), cmpfunc);
 
                         listaHospedes[posicaoNome].quarto = quarto;
-
-
-                        for(int i = 0; i < 10; i++){
-                            printf(" array na posicao [%d] = %d\n", i, quartosVazios[i]);
                         }
-                    }
+
 
                     printf("Hospede editado com sucesso!\n");
+                }
                 }
                 break;
                 // caso 5 da main
@@ -265,9 +267,6 @@ int main(){
                     removerHospede(listaHospedes, &qtdHospedes, rgHospede, quartosVazios, &tamanhoArray, quartosOcupados);
                     tamanhoArray++;
 
-                        for(int i = 0; i < 10; i++){
-                        printf(" array na posicao [%d] = %d\n", i, quartosVazios[i]);
-                        }
                     
                 }
                 break;
